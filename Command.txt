@@ -32,10 +32,8 @@ systemctl start xrdp
 
 netstat -antup | grep xrdp
 
- 
 ---------------------RDP--------------------------------
  
-
 yum -y groups install "KDE Plasma Workspaces"
 
 systemctl isolate graphical.target
@@ -64,11 +62,7 @@ systemctl start xrdp
 
 netstat -antup | grep xrdp
 
- 
-
 -----------VNC-----------------
-
-
 
 yum -y groups install "KDE Plasma Workspaces"
 
@@ -112,27 +106,22 @@ runlevel
 
 systemctl set-default graphical.target
 
+---------------------SSH Ubuntu----------------------------------
 
+sudo apt-get install nano -y
+sudo ufw allow 22
+sudo service ssh restart
 
-   12  reboot
+-----------------------VNV Ubuntu------------------------------
 
-   13  systemctl status vncserver@:1.service
+sudo apt install vnc4server xfce4 xfce4-goodies
 
-   14  vi /etc/systemd/system/vncserver\@\:1.service
+vncpasswd
 
-   15  runlevel
+vi nano ~/.vnc/xstartup
+#!/bin/bash
+startxfce4 &
 
-   16  
+chmod +x ~/.vnc/xstartup
 
-   17  reboot
-
-   18  vi /etc/systemd/system/vncserver\@\:1.service
-
-
-
-   22  reboot
-
-   23  
-
-   24  history
-
+vnc4server
