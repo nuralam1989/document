@@ -125,3 +125,9 @@ startxfce4 &
 chmod +x ~/.vnc/xstartup
 
 vnc4server
+
+ss -ltn
+
+sudo ufw allow from any to any port 5901 proto tcp
+
+
