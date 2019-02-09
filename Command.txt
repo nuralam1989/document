@@ -1,0 +1,138 @@
+yum -y groups install "KDE Plasma Workspaces"
+
+echo "exec startkde" >> ~/.xinitrc
+
+startx
+
+systemctl set-default graphical.target
+
+reboot
+
+runlevel
+
+yum -y install xrdp tigervnc-server
+
+sestatus
+
+systemctl status firewall
+
+systemctl status firewalld.service
+
+chcon --type=bin_t /usr/sbin/xrdp
+
+chcon --type=bin_t /usr/sbin/xrdp-sesman
+
+firewall-cmd --permanent --zone=public --add-port=3389/tcp
+
+firewall-cmd --reload
+
+systemctl enable xrdp
+
+systemctl start xrdp
+
+netstat -antup | grep xrdp
+
+ 
+---------------------RDP--------------------------------
+ 
+
+yum -y groups install "KDE Plasma Workspaces"
+
+systemctl isolate graphical.target
+
+systemctl set-default graphical.target
+
+runlevel
+
+yum -y install xrdp tigervnc-server
+
+sestatus
+
+chcon --type=bin_t /usr/sbin/xrdp
+
+chcon --type=bin_t /usr/sbin/xrdp-sesman
+
+systemctl status firewalld.service
+
+firewall-cmd --permanent --zone=public --add-port=3389/tcp
+
+firewall-cmd --reload
+
+systemctl enable xrdp
+
+systemctl start xrdp
+
+netstat -antup | grep xrdp
+
+ 
+
+-----------VNC-----------------
+
+
+
+yum -y groups install "KDE Plasma Workspaces"
+
+yum -y install tigervnc-server
+
+useradd -m jiri
+
+passwd jiri
+
+71r1#4321
+
+su - jiri
+
+vncserver
+
+exit
+
+cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service
+
+vi /etc/systemd/system/vncserver\@\:1.service
+
+Replace <USER> with username
+
+systemctl daemon-reload
+
+systemctl start vncserver@:1.service
+
+systemctl enable vncserver@:1.service
+
+firewall-cmd --permanent --zone=public --add-service vnc-server
+
+firewall-cmd --reload
+
+netstat -antup | grep vnc
+
+runlevel
+
+systemctl isolate graphical.target
+
+runlevel
+
+systemctl set-default graphical.target
+
+
+
+   12  reboot
+
+   13  systemctl status vncserver@:1.service
+
+   14  vi /etc/systemd/system/vncserver\@\:1.service
+
+   15  runlevel
+
+   16  
+
+   17  reboot
+
+   18  vi /etc/systemd/system/vncserver\@\:1.service
+
+
+
+   22  reboot
+
+   23  
+
+   24  history
+
